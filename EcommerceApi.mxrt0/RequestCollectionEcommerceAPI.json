@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "1415f61b-0097-4ced-b101-4c39539287bb",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47639457",
+		"_collection_link": "https://lunar-comet-5027250.postman.co/workspace/ea33c09d-b836-42d8-893c-f37f9b9db340/collection/47639457-1415f61b-0097-4ced-b101-4c39539287bb?action=share&source=collection_link&creator=47639457"
+	},
+	"item": [
+		{
+			"name": "Add Category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"categoryName\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/Categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Categories/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"name\",\n    \"description\":\"description\",\n    \"price\": 2.85,\n    \"quantity\": 5,\n    \"categoryId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/Products",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Products"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Sales/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Sales",
+						"1"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products (Paginated)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Products?pageNumber=1&pageSize=10",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1",
+							"description": "Defaults to 1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"description": "Defaults to 10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Sale",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"products\": [\r\n    { \"productId\": 2, \"quantity\": 1 },\r\n    { \"productId\": 4, \"quantity\": 1 },\r\n    { \"productId\": 6, \"quantity\": 1 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/Sales",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sale By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Sales/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Sales",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sales (Paginated)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/Sales?pageNumber=1&pageSize=10",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"Sales"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1",
+							"description": "Defaults to 1."
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"description": "Defaults to 10."
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
